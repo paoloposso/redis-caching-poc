@@ -1,6 +1,6 @@
 const express = require('express');
 const PhotosService = require('./services/photo-service');
-const cache = require('./infra/redis-caching');
+const cache = require('./adapters/caching/redis-caching');
 
 const app = express();
 
