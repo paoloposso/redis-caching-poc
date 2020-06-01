@@ -3,11 +3,7 @@ const {promisify} = require('util');
 
 const client = redis.createClient(process.env.REDIS_PORT || 6379);
 
-client.on('error', (err) => {
-    console.error(err);
-});
-
-class Caching {
+class RedisCache {
 
     getValue(key) {
         const get = promisify(client.get).bind(client);
@@ -19,4 +15,8 @@ class Caching {
     }
 }
 
-module.exports = new Caching();
+client.on('error', (err) => {
+    console.error(err);
+});
+
+module.exports = new RedisCache();
