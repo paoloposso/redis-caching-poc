@@ -7,7 +7,7 @@ class PhotoService {
     }
 
     async getAll() {
-        const cacheKey = 'user:photos1';
+        const cacheKey = 'user:photos';
 
         let photos = await this.cacheRepo.getValue(cacheKey);
 
