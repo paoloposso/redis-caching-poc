@@ -4,7 +4,7 @@ const cache = require('../adapters-internal/caching-redis/redis-caching');
 
 const service = new PhotosService({ cache });
 
-const registerPhotoActions = (app) => {
+const registerPhotoActions = async (app) => {
     app.get('/photos', async (req, res) => {
         let photos = await service.getAll();
     
