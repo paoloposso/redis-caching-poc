@@ -2,14 +2,13 @@ const mongoose = require('mongoose');
 
 module.exports.connectToMongoDb = () => {
 
-    let mongoDB = process.env.MONGODB_URI || 'mongodb://localhost:27017/testdb';
+    let mongoDB = process.env.MONGODB_URI;
 
-    mongoose.set('useUnifiedTopology', true);
-    mongoose.connect(mongoDB, { useNewUrlParser: true }).then(cnn => console.log(`Mongoose connected to port`, cnn.connections[0].port));
+    mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true })
+        .then(cnn => console.log('mongo connected on port', cnn.connection.port, 'ready state', cnn.connection.readyState))
+        .catch(err => console.error(err));
 
     mongoose.Promise = global.Promise;
 
-    let db = mongoose.connection;
-
-    db.on('error', console.error.bind(console, 'Erro na Ligação ao MongoDB'));
+    mongoose.connection.on('error', (err) => console.error('error trying to connect to mongo', err));
 }

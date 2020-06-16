@@ -6,7 +6,8 @@ services:
             - 6379:6379
     mongo:
         image: mongo
-        ports: "27000:27017"
+        ports: 
+            - 27017:27017
     node-app:
         ports:
             - 3000:3000
@@ -16,7 +17,7 @@ services:
             - NODE_ENV=development
             - REDIS_PORT=6379
             - REDIS_HOST=redis
-            - MONGO_URI=mongodb://mongo:27000/testdb
+            - MONGODB_URI=mongodb://mongo:27017/testdb
         depends_on:
             - redis
             - mongo
