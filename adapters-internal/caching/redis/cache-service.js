@@ -4,7 +4,7 @@ const {promisify} = require('util');
 // const port = process.env.REDIS_PORT || 32652;
 // const host = process.env.REDIS_HOST || '192.168.39.130';
 
-class RedisCache {
+class CacheServer {
 
     constructor() {
         const port = process.env.REDIS_PORT || 6379;
@@ -31,4 +31,4 @@ class RedisCache {
     }
 }
 
-module.exports = new RedisCache();
+module.exports = new CacheServer();

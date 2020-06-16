@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 module.exports.connectToMongoDb = () => {
 
-    let mongoDB = process.env.MONGODB_URI;
+    let mongoDB = process.env.MONGODB_URI || 'mongodb://localhost:27017';
 
     mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true })
         .then(cnn => console.log('mongo connected on port', cnn.connection.port, 'ready state', cnn.connection.readyState))
