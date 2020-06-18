@@ -11,4 +11,8 @@ module.exports.connectToMongoDb = () => {
     mongoose.Promise = global.Promise;
 
     mongoose.connection.on('error', (err) => console.error('error trying to connect to mongo', err));
+
+    mongoose.connection.once("open", function() {
+        console.log("MongoDB database connection established successfully");
+      });
 }
