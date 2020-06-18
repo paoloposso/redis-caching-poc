@@ -7,8 +7,7 @@ class UserRepository {
     }
 
     insert(user) {
-        this.adapter.createUser(user);
-        console.log(user);
+        return this.adapter.createUser(user);
     }
 
     getAll() {

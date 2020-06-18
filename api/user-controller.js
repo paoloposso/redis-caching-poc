@@ -4,11 +4,15 @@ const cache = require('../infrastructure/caching/redis/cache-service');
 
 const registerUserActions = (app) => {
     app.get('/users/all', (req, res) => {
-        res.json(userService.getAll());
+        userService.getAll()
+            .then(users => res.json(users))
+            .catch(err => res.status(500).json(err));
     });
 
     app.post('/user', (req, res) => {
-        res.json(userService.insert(req.body));
+        userService.insert(req.body)
+            .then(user => res.json(user))
+            .catch(err => res.status(500).json(err));
     });
 }
 

@@ -8,6 +8,8 @@ services:
         image: mongo
         ports: 
             - 27017:27017
+        volumes: 
+            - /home/pvposso/mongodata/mongoDB:/data/db
     node-app:
         ports:
             - 3000:3000

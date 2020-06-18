@@ -5,18 +5,24 @@ const Schema = mongoose.Schema;
 let user = new Schema(
   {
     name: {
-      type: String
+      type: String,
+      required: true
     },
     document: {
-      type: String
+      type: String,
+      required: true
     },
     email: {
-        type: String
+        type: String,
+        required: true,
+        unique: true
     },
-    addresses: [
+    addresses: {
+      default: [
         {
             street: {
-                type: String
+                type: String,
+                required: true
             }, 
             number: {
                 type: String
@@ -31,7 +37,9 @@ let user = new Schema(
                 type: String
             }, 
         }
-    ]
+      ],
+      type: Array
+    }
   },
   { collection: "Users" }
 );

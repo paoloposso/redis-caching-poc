@@ -8,7 +8,7 @@ class UserService {
     }
 
     insert(user) {
-        userRepository.insert(user);
+        return userRepository.insert(user);
     }
 }
 
