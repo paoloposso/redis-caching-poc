@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-module.exports.connectToMongoDb = () => {
+module.exports.connectToMongoDb = (databaseName) => {
 
-    let mongoDB = process.env.MONGODB_URI || 'mongodb://localhost:27017';
+    let mongoDB = process.env.MONGODB_URI || `mongodb://localhost:27017/${databaseName}`;
 
     mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true })
         .then(cnn => console.log('mongo connected on port', cnn.connection.port, 'ready state', cnn.connection.readyState))

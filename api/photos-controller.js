@@ -1,4 +1,3 @@
-// const express = require('express');
 const PhotosService = require('../core/services/photo-service');
 const cache = require('../infrastructure/caching/redis/cache-service');
 
