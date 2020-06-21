@@ -8,11 +8,47 @@ class User {
      * @param {string} email 
      * 
      */
-    constructor (document, name, id, addresses, email){}
+    constructor (document, name, email) {
+        this.document = document;
+        this.name = name;
+        this.email = email;
+
+        this.addresses = new Array();
+    }
+
+    validate() {
+        let err = [];
+        if (!this.email) {
+            err.push({error: 'Invalid email'});
+        }
+        if (!this.name) {
+            err.push({error: 'Name is required'});
+        }
+
+        return err;
+    }
+
+    addId(id) {
+        this.id = id;
+    }
+
+    /**
+     * 
+     * @param {Address} address 
+     */
+    addAddress(address) {
+        this.addresses.push(new Address(address.street, address.number, address.zipCode, address.city, address.country));
+    }
 }
 
 class Address {
-    constructor (street, number, zipCode, city, country){}
+    constructor (street, number, zipCode, city, country) {
+        this.street = street;
+        this.number = number;
+        this.zipCode = zipCode;
+        this.city = city;
+        this.country = country;
+    }
 }
 
 module.exports = { 
