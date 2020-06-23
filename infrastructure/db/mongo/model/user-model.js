@@ -17,6 +17,9 @@ let user = new Schema(
         required: true,
         unique: true
     },
+    password: {
+      type: String
+    },
     addresses: {
       default: [
         {
@@ -43,6 +46,8 @@ let user = new Schema(
   },
   { collection: "Users" }
 );
+
+user.index({name: 1, password: 1});
 
 const User = mongoose.model("users", user);
 

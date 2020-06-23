@@ -19,10 +19,10 @@ class User {
     validate() {
         let err = [];
         if (!this.email) {
-            err.push({error: 'Invalid email'});
+            err.push('Invalid email');
         }
         if (!this.name) {
-            err.push({error: 'Name is required'});
+            err.push('Name is required');
         }
 
         return err;

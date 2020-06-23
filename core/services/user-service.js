@@ -14,7 +14,7 @@ class UserService {
         let err = user.validate();
 
         if(err.length > 0)
-            return Promise.reject(err);
+            return Promise.reject({errors: err});
 
         if(req.addresses) {
             req.addresses.forEach(address => {

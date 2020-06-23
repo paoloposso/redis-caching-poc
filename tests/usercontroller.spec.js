@@ -15,16 +15,6 @@ beforeAll(() => {
 
 describe('Sample Test', () => {   
 
-    it('should get validation error', async (done) => {
-        const res = await request.post('/user').send({name:'test'});
-
-        expect(res.statusCode === 500).toBeTruthy();
-        expect(res.body.message).toContain('users validation failed');
-        expect(res.body.message).toContain('`email` is required');
-
-        done();
-    });
-
     it('should insert user John', async (done) => {
 
         const res = await request.post('/user').send({
@@ -44,6 +34,27 @@ describe('Sample Test', () => {
 
         expect(res.statusCode).toEqual(200);
         expect(res.body.name).toEqual('John');
+
+        done();
+    });
+
+    it('should get name validation error', async (done) => {
+
+        const res = await request.post('/user').send({
+            "email": "john@gmail.com",
+            "document": "01234567890",
+            "addresses": [
+                {
+                    "street": "test avenue",
+                    "number": "880",
+                    "city": "Sao Paulo",
+                    "country": "Brazil",
+                    "zipCode": "012345789"
+                }
+            ]
+        });
+
+        expect(res.statusCode).toEqual(500);
 
         done();
     });
