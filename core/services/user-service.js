@@ -22,6 +22,8 @@ class UserService {
             });
         }
 
+        user.generateId();
+        
         return userRepository.insert(user);
     }
 }

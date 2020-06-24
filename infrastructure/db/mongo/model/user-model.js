@@ -4,6 +4,11 @@ const Schema = mongoose.Schema;
 
 let user = new Schema(
   {
+    uuid: {
+      type: String,
+      required: true,
+      unique: true
+    },
     name: {
       type: String,
       required: true
@@ -13,7 +18,7 @@ let user = new Schema(
       required: true
     },
     email: {
-        type: String,
+        type: Schema.Types.String,
         required: true,
         unique: true
     },
@@ -47,7 +52,7 @@ let user = new Schema(
   { collection: "Users" }
 );
 
-user.index({name: 1, password: 1});
+// user.index({name: 1, password: 1});
 
 const User = mongoose.model("users", user);
 

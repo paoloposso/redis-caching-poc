@@ -1,10 +1,10 @@
+const uuid = require('uuid').v4;
+
 class User {
     /**
      * 
      * @param {string} document 
      * @param {string} name 
-     * @param {string} id 
-     * @param {[Address]} addresses 
      * @param {string} email 
      * 
      */
@@ -28,10 +28,10 @@ class User {
         return err;
     }
 
-    addId(id) {
-        this.id = id;
+    generateId() {
+        this.uuid = uuid();
     }
-
+    
     /**
      * 
      * @param {Address} address 
