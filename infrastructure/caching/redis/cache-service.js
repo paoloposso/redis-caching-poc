@@ -4,9 +4,9 @@ const {promisify} = require('util');
 class CacheServer {
 
     constructor() {
-        const port = process.env.REDIS_URL || 'localhost:6379';
+        const url = process.env.REDIS_URL || 'localhost:6379';
 
-        this.client = redis.createClient()
+        this.client = redis.createClient(url);
 
         this.client.on('error', (err) => {
             console.error(err);
