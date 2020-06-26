@@ -13,7 +13,7 @@ class User {
         this.name = name;
         this.email = email;
 
-        this.addresses = new Array();
+        this.addresses = [];
     }
 
     validate() {

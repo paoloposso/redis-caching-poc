@@ -1,16 +1,12 @@
 const redis = require('redis');
 const {promisify} = require('util');
 
-// const port = process.env.REDIS_PORT || 32652;
-// const host = process.env.REDIS_HOST || '192.168.39.130';
-
 class CacheServer {
 
     constructor() {
-        const port = process.env.REDIS_PORT || 6379;
-        const host = process.env.REDIS_HOST || 'localhost';
+        const port = process.env.REDIS_URL || 'localhost:6379';
 
-        this.client = redis.createClient(port, host);
+        this.client = redis.createClient()
 
         this.client.on('error', (err) => {
             console.error(err);

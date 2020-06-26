@@ -1,7 +1,7 @@
 const { app } = require('./app');
 const { connectToMongoDb } = require('./infrastructure/db/mongo/mongo-connect');
 
-connectToMongoDb('userstest');
+connectToMongoDb();
 
 const port = process.env.PORT || 5000;
 

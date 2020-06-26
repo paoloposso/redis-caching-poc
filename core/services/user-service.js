@@ -1,6 +1,5 @@
-const fetch = require('node-fetch');
 const userRepository = require('../repo/user-repository');
-const { User, Address } = require('../entities/user');
+const { User } = require('../entities/user');
 
 class UserService {
 

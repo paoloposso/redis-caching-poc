@@ -12,7 +12,7 @@ services:
             - /home/pvposso/mongodata/mongoDB:/data/db
     node-app:
         ports:
-            - 3000:3000
+            - 5500:5500
         build:
             context: .
         environment:
@@ -20,6 +20,7 @@ services:
             - REDIS_PORT=6379
             - REDIS_HOST=redis
             - MONGODB_URI=mongodb://mongo:27017/testdb
+            - PORT=5500
         depends_on:
             - redis
             - mongo

@@ -5,7 +5,7 @@ const User = require('../infrastructure/db/mongo/model/user-model');
 
 const { connectToMongoDb } = require('../infrastructure/db/mongo/mongo-connect');
 
-connectToMongoDb('userstestjest');
+connectToMongoDb();
 
 jest.setTimeout(30000);
 
