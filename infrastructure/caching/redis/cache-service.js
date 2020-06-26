@@ -13,7 +13,7 @@ class CacheServer {
         });
 
         this.client.on('ready', () => {
-            console.log('Redis connected on port', port);
+            console.log('Redis connected on ', url);
         });
     }
 
