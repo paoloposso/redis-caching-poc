@@ -3,21 +3,22 @@ const { User } = require('../entities/user');
 
 class UserService {
 
+    cacheKey = 'users';
+
     constructor({cache}) {
         this.cacheRepo = cache;
     }
 
     async getAll() {
-        const cacheKey = 'users';
 
-        let users = JSON.parse(await this.cacheRepo.getValue(cacheKey));
+        let users = JSON.parse(await this.cacheRepo.getValue(this.cacheKey));
 
         if (users && users.length > 0) {
             return { source: 'cache', users }
         }
 
         return userRepository.getAll().then(users => {
-            this.cacheRepo.setValue(cacheKey, JSON.stringify(users));
+            this.cacheRepo.setValue(this.cacheKey, JSON.stringify(users));
 
             return { source: 'db', users };
         });
@@ -42,7 +43,15 @@ class UserService {
 
         user.generateId();
         
-        return userRepository.insert(user);
+        return userRepository.insert(user).then(() => {
+            
+            //updating cache database
+            userRepository.getAll().then(users => {
+                this.cacheRepo.setValue(this.cacheKey, JSON.stringify(users));
+            });
+
+            return user;
+        });
     }
 }
 
