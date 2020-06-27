@@ -8,4 +8,8 @@ app.use(express.json());
 registerPhotoActions(app);
 registerUserActions(app);
 
+process.on('uncaughtException', function(err) {
+    console.log('Caught exception: ' + err);
+});
+
 module.exports = { app };

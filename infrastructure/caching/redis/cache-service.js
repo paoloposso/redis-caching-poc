@@ -4,7 +4,7 @@ const {promisify} = require('util');
 class CacheServer {
 
     constructor() {
-        const url = process.env.REDIS_URL || 'localhost:6379';
+        const url = process.env.REDIS_URL;
 
         this.client = redis.createClient(url);
 

@@ -1,6 +1,8 @@
 
-const userService = require('../core/services/user-service');
+const UserService = require('../core/services/user-service');
 const cache = require('../infrastructure/caching/redis/cache-service');
+
+const userService = new UserService({ cache });
 
 const registerUserActions = (app) => {
     app.get('/users/all', (req, res) => {

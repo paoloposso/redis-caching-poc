@@ -3,8 +3,24 @@ const { User } = require('../entities/user');
 
 class UserService {
 
-    getAll() {
-        return userRepository.getAll();
+    constructor({cache}) {
+        this.cacheRepo = cache;
+    }
+
+    async getAll() {
+        const cacheKey = 'users';
+
+        let users = await this.cacheRepo.getValue(cacheKey);
+
+        if (users) {
+            return { source: 'cache', data: JSON.parse(users) }
+        }
+
+        return userRepository.getAll().then(users => {
+            this.cacheRepo.setValue(cacheKey, JSON.stringify(users));
+
+            return { source: 'db', data: users };
+        });
     }
 
     insert(req) {
@@ -27,4 +43,4 @@ class UserService {
     }
 }
 
-module.exports = new UserService();
+module.exports = UserService;
