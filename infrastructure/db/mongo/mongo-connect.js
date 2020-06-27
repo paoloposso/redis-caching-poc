@@ -2,10 +2,14 @@ const mongoose = require('mongoose');
 
 module.exports.connectToMongoDb = () => {
 
-    let mongoDB = process.env.MONGODB_URI || `mongodb://localhost:27017/security`;
+    let mongoDB = process.env.MONGODB_URI;
 
-    if (process.env.NODE_ENV === 'test') {
-        mongoDB += '_test';
+    //running locally
+    if (!mongoDB) {
+        mongoDB = `mongodb://localhost:27017/security`
+        if (process.env.NODE_ENV === 'test') {
+            mongoDB += '_test';
+        }
     }
 
     mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true })
@@ -18,5 +22,5 @@ module.exports.connectToMongoDb = () => {
 
     mongoose.connection.once("open", function() {
         console.log("MongoDB database connection established successfully");
-      });
+    });
 }

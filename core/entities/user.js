@@ -1,4 +1,6 @@
 const uuid = require('uuid').v4;
+const Address = require('./address');
+const hashingService = require('../util/hashing-service');
 
 class User {
     /**
@@ -6,23 +8,32 @@ class User {
      * @param {string} document 
      * @param {string} name 
      * @param {string} email 
+     * @param {string} password 
      * 
      */
-    constructor (document, name, email) {
+    constructor (document, name, email, password) {
         this.document = document;
         this.name = name;
         this.email = email;
+        this.password = password;
 
         this.addresses = [];
     }
 
-    validate() {
+    async generateHashedPassword(password) {
+        this.password = await hashingService.getHash(password);
+    }
+
+    validateCreation() {
         let err = [];
         if (!this.email) {
             err.push('Invalid email');
         }
         if (!this.name) {
             err.push('Name is required');
+        }
+        if (!this.password) {
+            err.push('Password is required');
         }
 
         return err;
@@ -41,15 +52,7 @@ class User {
     }
 }
 
-class Address {
-    constructor (street, number, zipCode, city, country) {
-        this.street = street;
-        this.number = number;
-        this.zipCode = zipCode;
-        this.city = city;
-        this.country = country;
-    }
-}
+
 
 module.exports = { 
     User,

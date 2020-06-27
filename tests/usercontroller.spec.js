@@ -21,6 +21,7 @@ describe('Sample Test', () => {
             "name": "John",
             "email": "john@gmail.com",
             "document": "01234567890",
+            "password": "123456",
             "addresses": [
                 {
                     "street": "test avenue",
@@ -34,13 +35,14 @@ describe('Sample Test', () => {
 
         expect(res.statusCode).toEqual(200);
         expect(res.body.name).toEqual('John');
+        expect(res.body.uuid).not.toEqual('');
 
         done();
     });
 
     it('should get name validation error', async (done) => {
 
-        const res = await request.post('/user').send({
+        request.post('/user').send({
             "email": "john@gmail.com",
             "document": "01234567890",
             "addresses": [
@@ -52,17 +54,17 @@ describe('Sample Test', () => {
                     "zipCode": "012345789"
                 }
             ]
+        }).then(res => {
+            expect(res.statusCode).toEqual(500);
+            expect(res.body.errors).not.toBeUndefined();
+            done();
         });
-
-        expect(res.statusCode).toEqual(500);
-
-        done();
     });
 
     it('should list all users', async (done) => {
         const res = await request.get('/users/all');
 
-        expect(res.body.length > 0).toBeTruthy();
+        expect(res.body.users && res.body.users.length > 0).toBeTruthy();
 
         done();
     });

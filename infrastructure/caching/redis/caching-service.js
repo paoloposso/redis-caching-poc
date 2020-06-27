@@ -4,7 +4,7 @@ const {promisify} = require('util');
 class CacheServer {
 
     constructor() {
-        const url = process.env.REDIS_URL;
+        const url = process.env.REDIS_URL; //assumes localhost if env var is undefined
 
         this.client = redis.createClient(url);
 
@@ -18,11 +18,15 @@ class CacheServer {
     }
 
     getValue(key) {
+        if (process.env.NODE_ENV === 'test') key += ':test'
+
         const get = promisify(this.client.get).bind(this.client);
         return get(key);
     }
 
     setValue(key, value) {
+        if (process.env.NODE_ENV === 'test') key += ':test'
+
         this.client.setex(key, 3600, value);
     }
 }
