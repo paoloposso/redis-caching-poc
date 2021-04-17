@@ -1,5 +1,4 @@
-const bcrypt = require('bcrypt-promisify');
-const { promisify } = require('util');
+const bcrypt = require('bcrypt');
 
 const saltRounds = 12;
 
